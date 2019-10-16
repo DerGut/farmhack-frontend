@@ -80,9 +80,9 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-    this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-        : 'Hover over a state');
+    this._div.innerHTML = '<h4>Irgendwas mit Pflanzen</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + props.density + ' Feldkanten / Parsec<sup>2</sup>'
+        : 'Hover over a Feld');
 };
 
 info.addTo(map);
