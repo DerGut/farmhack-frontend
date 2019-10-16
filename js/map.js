@@ -1,7 +1,7 @@
 var map = L.map('map').setView([52.5545,7.9015], 11);
 var accessToken = 'pk.eyJ1IjoiZGVyZ3V0IiwiYSI6ImNpdG5lMmE1bDAwMzQzMm83NHFpaTdlaW8ifQ.hp122jysRM5Ic7TziyYFow';
-
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
+var tileServerUrl = 'https://api.mapbox.com/styles/v1/dergut/ck1tif3rb64un1cn6s2gszr90/tiles/256/{z}/{x}/{y}?access_token=' + accessToken;
+L.tileLayer(tileServerUrl, {
     id: 'mapbox.light'
 }).addTo(map);
 
