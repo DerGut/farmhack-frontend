@@ -119,7 +119,7 @@ xhttp.onload = function() {
     // method that we will use to update the control based on feature properties passed
     info.update = function (props) {
         this._div.innerHTML = '<h4>Kultur</h4>' +  (props ?
-            '<b>' + cultures[props.KULTURCODE] + '</b>' : 'Hover über a Feld');
+            '<b>' + cultures[props.KULTURCODE] + '</b>' : 'Klicke auf ein Feld');
         if (props && !(props.KULTURCODE in cultures)) {
             console.log(props.KULTURCODE);
         }
@@ -130,7 +130,6 @@ xhttp.onload = function() {
     var legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function (map) {
-
         var div = L.DomUtil.create('div', 'info legend');
 
         // loop through our density intervals and generate a label with a colored square for each interval
