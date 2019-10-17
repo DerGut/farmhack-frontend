@@ -119,7 +119,7 @@ xhttp.onload = function() {
     // method that we will use to update the control based on feature properties passed
     info.update = function (props) {
         this._div.innerHTML = '<h4>Kultur</h4>' +  (props ?
-            '<b>' + cultures[props.KULTURCODE] + '</b>' : 'Klicke auf ein Feld');
+            '<h5>' + cultures[props.KULTURCODE] + '</h5>' : 'Klicke auf ein Feld');
         if (props && !(props.KULTURCODE in cultures)) {
             console.log(props.KULTURCODE);
         }
