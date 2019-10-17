@@ -8,16 +8,18 @@ L.tileLayer(tileServerUrl, {
 var xhttp = new XMLHttpRequest();
 xhttp.onload = function() {
     var data = JSON.parse(this.responseText);
+    var colors = ['#800026', '#BD0026', '#E31A1C', '#FC4E2A', '#FD8D3C', '#FEB24C', '#FED976', '#FFEDA0'];
 
     function getColor(d) {
-        return d > 6 ? '#800026' :
-            d > 5  ? '#BD0026' :
-                d > 4  ? '#E31A1C' :
-                    d > 3  ? '#FC4E2A' :
-                        d > 2   ? '#FD8D3C' :
-                            d > 1   ? '#FEB24C' :
-                                d > 0   ? '#FED976' :
-                                    '#FFEDA0';
+        // var colors = ['#9e0142','#d53e4f','#f46d43','#fdae61','#fee08b','#ffffbf','#e6f598','#abdda4','#66c2a5','#3288bd','#5e4fa2'];
+        if (d - 1 >= colors.length) {
+            // If out of range return random color
+            console.log("random color");
+            return colors[Math.floor((Math.random() * colors.length))];
+        }
+
+        return colors[d - 1];
+
     }
 
     function style(feature) {
@@ -27,7 +29,7 @@ xhttp.onload = function() {
             opacity: 1,
             color: 'white',
             dashArray: '3',
-            fillOpacity: 0.7
+            fillOpacity: 0.6
         };
     }
 
@@ -96,8 +98,8 @@ xhttp.onload = function() {
         12: "Rispenhirse",
         13: "Buchweizen",
         14: "Amarant",
-        // 15:
-        // 16: ""
+        15: "Quinoa",
+        16: "Kartoffel",
         // 17
         18: "Erbsen",
         19: "Ackerbohnen",
@@ -118,6 +120,9 @@ xhttp.onload = function() {
     info.update = function (props) {
         this._div.innerHTML = '<h4>Kultur</h4>' +  (props ?
             '<b>' + cultures[props.KULTURCODE] + '</b>' : 'Hover über a Feld');
+        if (props && !(props.KULTURCODE in cultures)) {
+            console.log(props.KULTURCODE);
+        }
     };
 
     info.addTo(map);
@@ -126,13 +131,14 @@ xhttp.onload = function() {
 
     legend.onAdd = function (map) {
 
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        var div = L.DomUtil.create('div', 'info legend');
 
         // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML += '<i style="background:' + getColor(i) + '"></i> ' + cultures[i] + '<br>' ;
+        for (var i = 0; i < colors.length; i++) {
+            div.innerHTML += '<i style="background:' + getColor(i + 1) + '"></i> ' +
+            (cultures[i] + '<br>');
         }
+        div.innerHTML += '<i style="background:' + getColor(i + 1) + '"></i> Weitere...';
 
         return div;
     };
